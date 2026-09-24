@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PortfolioAI - Market Explainer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topnav">
+      <div class="topnav-left">
+        <div class="topnav-logo">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <span>PortfolioAI</span>
+        </div>
+      </div>
+      <div class="topnav-meta">Class 2 &middot; Market Explainer</div>
+    </header>
+
+    <div class="app-body">
+      <nav class="sidebar">
+        <div class="sidebar-section-label">Navigation</div>
+        <a href="/" class="sidebar-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </a>
+        <div class="sidebar-section-label">Modules</div>
+        <a href="/class2" class="sidebar-link active">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Market Explainer
+        </a>
+        <a href="/class3" class="sidebar-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Technical Analyst
+        </a>
+      </nav>
+
+      <main class="main-panel">
+        <section class="page-content">
+          <div class="section-header">
+            <div class="section-header-left">
+              <h1 class="section-title">Market Explainer</h1>
+              <p class="section-sub">Ask about stocks, crypto, ETFs, or beginner investing concepts</p>
+            </div>
+            <span class="section-badge">Class 2</span>
+          </div>
+
+          <div class="explainer-layout">
+            <div class="explainer-stack">
+              <div class="explainer-card">
+                <div class="explainer-card-header">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                  <div>
+                    <div class="explainer-card-title">Chat With the Agent</div>
+                    <div class="explainer-card-sub">The LangGraph agent classifies, routes, and simplifies.</div>
+                  </div>
+                </div>
+                <div class="explainer-chip-row" id="prompt-chips"></div>
+                <div class="explainer-chat" id="chat-messages"></div>
+                <div class="explainer-input-bar">
+                  <textarea class="explainer-input" id="question-input" placeholder="Try: Why did Nvidia stock go up?"></textarea>
+                  <button class="explainer-send" id="send-btn" type="button">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    Explain
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="explainer-stack">
+              <div class="explainer-card">
+                <div class="explainer-card-header">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                  <div>
+                    <div class="explainer-card-title">Run Summary</div>
+                    <div class="explainer-card-sub">Topic detection, branch selection, and graph output.</div>
+                  </div>
+                </div>
+                <div class="explainer-meta">
+                  <div class="explainer-meta-row">
+                    <span class="explainer-meta-label">Detected Topic</span>
+                    <span class="explainer-pill" id="detected-topic">Waiting</span>
+                  </div>
+                  <div class="explainer-meta-row">
+                    <span class="explainer-meta-label">Routed To</span>
+                    <span class="explainer-meta-value" id="route-label">Not run yet</span>
+                  </div>
+                </div>
+                <div class="explainer-context-block">
+                  <div class="explainer-card-sub">Live Context Used</div>
+                  <div class="explainer-context-list" id="context-list"></div>
+                </div>
+              </div>
+
+              <div class="explainer-card">
+                <div class="explainer-card-header">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <div>
+                    <div class="explainer-card-title">Graph Trace</div>
+                    <div class="explainer-card-sub">Each step from the LangGraph workflow.</div>
+                  </div>
+                </div>
+                <div class="explainer-trace" id="graph-trace"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='class2.js') }}"></script>
+</body>
+</html>

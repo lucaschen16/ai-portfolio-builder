@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PortfolioAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topnav">
+      <div class="topnav-left">
+        <div class="topnav-logo">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <span>PortfolioAI</span>
+        </div>
+      </div>
+      <div class="topnav-meta">Dashboard</div>
+    </header>
+
+    <div class="app-body">
+      <nav class="sidebar">
+        <div class="sidebar-section-label">Navigation</div>
+        <a href="/" class="sidebar-link active">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </a>
+        <div class="sidebar-section-label">Modules</div>
+        <a href="/class2" class="sidebar-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Market Explainer
+        </a>
+        <a href="/class3" class="sidebar-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Technical Analyst
+        </a>
+      </nav>
+
+      <main class="main-panel">
+        <section class="page-content">
+          <!-- Hero -->
+          <div class="dash-hero">
+            <div class="dash-hero-glow"></div>
+            <h1 class="dash-hero-title">Welcome to <span class="text-accent">PortfolioAI</span></h1>
+            <p class="dash-hero-sub">AI-powered portfolio intelligence. Choose a module below to get started.</p>
+          </div>
+
+          <!-- Module cards -->
+          <div class="dashboard-cards">
+            <a href="/class2" class="dash-card">
+              <div class="dash-card-icon dash-card-icon-blue">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <span class="dash-card-badge">Class 2</span>
+              <h2 class="dash-card-title">Market Explainer</h2>
+              <p class="dash-card-desc">Ask questions about stocks, crypto, ETFs, or investing concepts. A LangGraph agent routes, researches, and explains.</p>
+              <span class="dash-card-cta">Open module &rarr;</span>
+            </a>
+            <a href="/class3" class="dash-card">
+              <div class="dash-card-icon dash-card-icon-green">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+              <span class="dash-card-badge">Class 3</span>
+              <h2 class="dash-card-title">Technical Analyst</h2>
+              <p class="dash-card-desc">6-month candlestick chart, technical signals engine, AI analyst verdict, and portfolio manager decision.</p>
+              <span class="dash-card-cta">Open module &rarr;</span>
+            </a>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
