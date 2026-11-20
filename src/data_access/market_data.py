@@ -33,41 +33,41 @@ def normalize_ticker(raw: str) -> str:
 
 
 def fetch_ohlcv(ticker: str) -> dict | None:
-    """
-    TODO 1: Fetch 1 year of daily OHLCV data for a ticker from Yahoo Finance.
+    """Fetch one year of daily prices and volume, requiring at least 20 complete days."""
+    try:
+        request = urllib.request.Request(CHART_URL.format(ticker=ticker), headers=HEADERS)
+        with urllib.request.urlopen(request, timeout=15) as response:
+            payload = json.load(response)
 
-    Steps:
-    1. Build the URL using CHART_URL.format(ticker=ticker)
-    2. Create a request with urllib.request.Request(url, headers=HEADERS)
-    3. Open it with urllib.request.urlopen(request, timeout=15)
-    4. Parse the JSON response with json.load(response)
-    5. Get the chart result: payload["chart"]["result"][0]
-    6. Extract timestamps: chart["timestamp"]
-    7. Extract quote data: chart["indicators"]["quote"][0]
-       This dict has keys: "open", "high", "low", "close", "volume"
-    8. Loop through all the data points. For each row:
-       - if any of open/high/low/close is None, skip that row
-       - otherwise, round the OHLC values to 2 decimal places
-       - convert volume to int (use 0 if volume is None)
-    9. If you end up with fewer than 20 clean data points, return None
-    10. Return a dict with keys:
-        {
+        chart = payload["chart"]["result"][0]
+        quote = chart["indicators"]["quote"][0]
+        data = {
             "ticker": ticker,
-            "timestamps": [...],
-            "opens": [...],
-            "highs": [...],
-            "lows": [...],
-            "closes": [...],
-            "volumes": [...]
+            "timestamps": [],
+            "opens": [],
+            "highs": [],
+            "lows": [],
+            "closes": [],
+            "volumes": [],
         }
-    11. If anything fails (network error, bad response), return None
+        rows = zip(
+            chart["timestamp"], quote["open"], quote["high"], quote["low"],
+            quote["close"], quote["volume"], strict=True,
+        )
+        for timestamp, opening, high, low, close, volume in rows:
+            if None in (opening, high, low, close):
+                continue
+            data["timestamps"].append(timestamp)
+            data["opens"].append(round(opening, 2))
+            data["highs"].append(round(high, 2))
+            data["lows"].append(round(low, 2))
+            data["closes"].append(round(close, 2))
+            data["volumes"].append(int(volume) if volume is not None else 0)
 
-    Hint: wrap the whole thing in a try/except and return None on error.
-    """
-    pass
+        return data if len(data["closes"]) >= 20 else None
+    except Exception:
+        return None
 
-
-# ── Class 2 compatibility (fully implemented) ───────────────────────
 
 def _guess_ticker(question: str, topic: str) -> str | None:
     lowered = question.lower()

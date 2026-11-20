@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from flask import Flask, render_template
+from flask import Flask, redirect, render_template, url_for
 
 from news_explainer import news_explainer_bp
 from technical_analyst import technical_analyst_bp
@@ -18,11 +18,21 @@ def index():
 
 @app.get("/class2")
 def class2():
+    return redirect(url_for("market_explainer"))
+
+
+@app.get("/market-explainer")
+def market_explainer():
     return render_template("class2.html")
 
 
 @app.get("/class3")
 def class3():
+    return redirect(url_for("technical_analyst"))
+
+
+@app.get("/technical-analyst")
+def technical_analyst():
     return render_template("class3.html")
 
 

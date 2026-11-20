@@ -235,8 +235,8 @@ function updateQuickStats(data) {
 
   var vol = data.technical_analysis.volume;
   if (vol) {
-    document.getElementById("stats-volume").textContent = vol.latest ? (vol.latest / 1e6).toFixed(1) + "M" : "—";
-    document.getElementById("stats-vol-ratio").textContent = vol.ratio ? vol.ratio + "x" : "—";
+    document.getElementById("stats-volume").textContent = vol.latest != null ? (vol.latest / 1e6).toFixed(1) + "M" : "—";
+    document.getElementById("stats-vol-ratio").textContent = vol.ratio != null ? vol.ratio + "x" : "—";
   }
 
   if (data.analyst_report && data.analyst_report.technical_verdict) {
@@ -272,7 +272,7 @@ function updateAnalystCard(data) {
 
   document.getElementById("analyst-support").textContent = "$" + fmt(ta.levels.nearest_support);
   document.getElementById("analyst-resistance").textContent = "$" + fmt(ta.levels.nearest_resistance);
-  document.getElementById("analyst-confidence").textContent = ar.confidence ? ar.confidence + "%" : "—";
+  document.getElementById("analyst-confidence").textContent = ar.confidence != null ? ar.confidence + "%" : "—";
   document.getElementById("analyst-hint").textContent = (ar.portfolio_role_hint || "—").replace(/_/g, " ");
   document.getElementById("analyst-summary").textContent = ar.summary || "—";
   document.getElementById("analyst-caution").textContent = ar.caution || "—";
@@ -287,7 +287,7 @@ function updateManagerCard(data) {
 
   // Suggestion badge
   var suggEl = document.getElementById("mgr-suggestion");
-  var sugg = (pm.suggestion || "hold").toLowerCase();
+  var sugg = (pm.suggestion || "—").toLowerCase();
   suggEl.textContent = sugg.toUpperCase();
   suggEl.className = "ta-meta-value " + (sugg === "buy" ? "badge-green" : sugg === "sell" ? "badge-red" : "badge-amber");
 
@@ -318,6 +318,14 @@ function analyze() {
   var btn = document.getElementById("analyze-btn");
   btn.innerHTML = '<svg class="btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="btn-label">Loading…</span>';
   btn.disabled = true;
+
+  if (chart) {
+    chart.remove();
+    chart = null;
+  }
+  document.getElementById("chart-placeholder").style.display = "";
+  document.getElementById("quick-stats").style.display = "none";
+  document.getElementById("verdict-badge-row").style.display = "none";
 
   // Hide cards during loading
   document.getElementById("analyst-card").style.display = "none";

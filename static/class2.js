@@ -24,7 +24,7 @@ var state = {
   messages: [
     {
       role: "ai",
-      text: "Ask a market question and I will route it through the Class 2 explainer graph, then return a detailed beginner-friendly answer."
+      text: "Ask a market question for a beginner-friendly explanation."
     }
   ]
 };
